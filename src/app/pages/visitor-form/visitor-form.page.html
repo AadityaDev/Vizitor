@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>visitor-form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <form padding-right>
+    <ion-item>
+      <ion-label position="floating">Q1. </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label position="floating">Q2. </ion-label>
+      <ion-input type="text"></ion-input>
+    </ion-item>
+
+    <ion-button 
+      color="primary" 
+      expand="block" 
+      [disabled]="!isValid" 
+      (click)="basicFormFill()">
+      Next
+    </ion-button>
+  </form>
+
+</ion-content>

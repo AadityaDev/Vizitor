@@ -1,0 +1,57 @@
+<ion-header>
+  <!-- <ion-toolbar>
+    <ion-title>visitor-mobile-verify</ion-title>
+  </ion-toolbar> -->
+</ion-header>
+
+<ion-content no-padding>
+  <div class="main">
+    <ion-card no-margin>
+      <ion-card-content>
+        <ion-row class="row">
+          <div class="fire-logo">
+            <img src="assets/icon/favicon.png" class="img-logo">
+            <ion-text padding>
+              <h2 no-margin margin-vertical text-center>Enter mobile number to receive OTP</h2>
+            </ion-text>
+          </div>
+        </ion-row>
+        <ion-row>
+            <!-- <ion-select>
+              <ion-option *ngFor="let country of countries">
+              {{country.emoji}}  <p color="#FFFFFF">{{ country.name }}</p>
+              </ion-option>
+            </ion-select> -->
+            <!-- <app-flag-list>
+              
+            </app-flag-list> -->
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-input clearInput type="tel" placeholder="Mobile Number" [(ngModel)]="mobile" class="input" padding-horizontal
+              clear-input="true"></ion-input>
+          </ion-col>
+        </ion-row>
+        <ion-row *ngIf="showOTPInput" class="OTP-border">
+          
+        </ion-row>
+        <ion-row *ngIf="showOTPInput">
+          <ion-col>
+            <ion-text class="small">{{OTPmessage}}</ion-text>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+          <ion-col>
+            <ion-button *ngIf="!showOTPInput" expand="block" (click)="next()"  color="primary" class="transition">
+              <strong class="white">
+                Send OTP</strong></ion-button>
+            <ion-button *ngIf="showOTPInput" expand="block" (click)="register()"  color="primary" class="transition">
+              <strong class="white">
+                Verify OTP</strong></ion-button>
+          </ion-col>
+        </ion-row>
+
+      </ion-card-content>
+    </ion-card>
+  </div>
+</ion-content>

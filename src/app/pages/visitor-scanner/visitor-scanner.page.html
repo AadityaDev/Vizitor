@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="closeScanner()" color="success" expand="block">Close</ion-button>
+    </ion-buttons>
+    <ion-title>
+      Visitor QR Scan
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content [class.show-qr-scanner]="isOn">
+  <ion-card class="welcome-card">
+    <img src="/assets/qr.jfif" alt="" />
+    <ion-card-header>
+      <ion-card-subtitle>Company</ion-card-subtitle>
+      <ion-card-title> Scan To Get Your Visitor Pass </ion-card-title>
+    </ion-card-header>
+    <ion-card-content>
+      <p>A fast, energy efficient, highly-configurable QR code scanner.</p>
+    </ion-card-content>
+    <ion-button expand='block' margin (click)="goToQrScan()">Scan QR Code</ion-button>
+    <ion-item>
+      <div *ngIf="QRSCANNED_DATA">
+        <p>
+          Scanned Text : <b>{{QRSCANNED_DATA}}</b>
+        </p>
+      </div>
+    </ion-item>
+  </ion-card>
+</ion-content>
