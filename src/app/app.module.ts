@@ -18,6 +18,8 @@ import { InterceptorService } from './network/interceptor.service';
 import { FlagListComponent } from '../app/components/flag-list/flag-list.component';
 import { FlagLisModule } from '../app/components/flag-list/flag-list.module';
 import { QuestionComponent } from '../app/components/question/question.component';
+import { ServiceWorkerModule } from '@angular/service-worker';
+import { environment } from '../environments/environment';
 
 @NgModule({
   declarations: [AppComponent],
@@ -30,6 +32,7 @@ import { QuestionComponent } from '../app/components/question/question.component
     AppRoutingModule,
     HttpClientModule,
     FlagLisModule,
+    ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],
   providers: [
     Camera,
