@@ -22,18 +22,23 @@
               {{country.emoji}}  <p color="#FFFFFF">{{ country.name }}</p>
               </ion-option>
             </ion-select> -->
-            <!-- <app-flag-list>
+            <app-flag-list>
               
-            </app-flag-list> -->
+            </app-flag-list>
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-input clearInput type="tel" placeholder="Mobile Number" [(ngModel)]="mobile" class="input" padding-horizontal
-              clear-input="true"></ion-input>
+            <ion-input clearInput type="tel" placeholder="Mobile Number" required="true" [(ngModel)]="mobile" value="{{ mobile }}" class="input" padding-horizontal
+              clear-input="true">
+            </ion-input>
           </ion-col>
         </ion-row>
         <ion-row *ngIf="showOTPInput" class="OTP-border">
-          
+          <ion-col>
+            <ion-input clearInput type="number" placeholder="Ente OTP" required="true" [(ngModel)]="OTP" value="{{ OTP }}" class="input" padding-horizontal
+              clear-input="true">
+            </ion-input>
+          </ion-col>
         </ion-row>
         <ion-row *ngIf="showOTPInput">
           <ion-col>
@@ -44,10 +49,14 @@
           <ion-col>
             <ion-button *ngIf="!showOTPInput" expand="block" (click)="next()"  color="primary" class="transition">
               <strong class="white">
-                Send OTP</strong></ion-button>
-            <ion-button *ngIf="showOTPInput" expand="block" (click)="register()"  color="primary" class="transition">
+                Send OTP
+              </strong>
+              </ion-button>
+            <ion-button *ngIf="showOTPInput" expand="block" (click)="verifyOTP()"  color="primary" class="transition">
               <strong class="white">
-                Verify OTP</strong></ion-button>
+                Verify OTP
+              </strong>
+            </ion-button>
           </ion-col>
         </ion-row>
 

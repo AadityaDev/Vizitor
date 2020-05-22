@@ -11,6 +11,8 @@ import { AppRoutingModule } from './app-routing.module';
 
 import { Camera } from '@ionic-native/camera/ngx';
 import { QRScanner } from '@ionic-native/qr-scanner/ngx';
+// import { FormBuilder } from "@angular/forms";
+import { ReactiveFormsModule } from "@angular/forms";
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 // import { NativeStorage } from '@ionic-native/native-storage/ngx';
 // import { SecureStorage } '@ionic-native/secure-storage/ngx';
@@ -30,7 +32,10 @@ import { environment } from '../environments/environment';
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
+    // FormBuilder,
+    // FormGroup,
     HttpClientModule,
+    ReactiveFormsModule,
     FlagLisModule,
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production }),
   ],

@@ -30,23 +30,27 @@ export class InterceptorService implements HttpInterceptor {
     if (token) {
       request = request.clone({
         setHeaders: {
-          'Authorization': token
+          'authorization': `Bearer ${token}`
         }
       });
     }
-  
     if (!request.headers.has('Content-Type')) {
-      request = request.clone({
-        setHeaders: {
-          'content-type': 'application/json'
-        }
-      });
+      // request = request.clone({
+      //   setHeaders: {
+      //     'content-type': 'application/json'
+      //   }
+      // });
+      if (request.method === 'POST') {
+        request = request.clone({
+          setHeaders: {
+            'Content-Type': 'application/x-www-form-urlencoded'
+          }
+        });
+      }
     }
-  
     request = request.clone({
       headers: request.headers.set('Accept', 'application/json')
     });
-  
     return next.handle(request).pipe(
       map((event: HttpEvent<any>) => {
         if (event instanceof HttpResponse) {
