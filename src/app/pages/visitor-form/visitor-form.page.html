@@ -9,6 +9,10 @@
   <!-- Checkin -->
   <form *ngIf='action === "checkin" 'padding-right padding-left>
     <h3>Checkin</h3>
+    <ion-item>
+      <ion-label position="floating">Email/Username</ion-label>
+      <ion-input type="email" formControlName="email" required></ion-input>
+    </ion-item>
   </form>
 
   <!-- Visitor -->
