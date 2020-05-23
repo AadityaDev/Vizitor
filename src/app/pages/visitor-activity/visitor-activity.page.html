@@ -1,26 +1,26 @@
-<ion-header>
+<ion-header (color)="secondary">
   <ion-toolbar>
-    <ion-title>visitor-activity</ion-title>
+    <ion-title>Purpose</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
 
-  <ion-button expand="block" (click)="visitiorActivity('checkin')" color="primary" class="transition">
+  <ion-button style="width: 75%;padding-left: 22%;margin-top: 30%;" (click)="visitiorActivity('checkin')" color="primary" class="transition">
     <strong class="white">
       Check In
     </strong>  
   </ion-button>
 
 
-  <ion-button expand="block" (click)="visitiorActivity('check')" class="transition">
+  <ion-button style="width: 75%;padding-left: 22%;margin-top: 15%;" (click)="visitiorActivity('check')" class="transition">
     <strong class="white">
       Check 
     </strong>  
   </ion-button>
 
 
-  <ion-button expand="block" (click)="visitiorActivity('checkout')" color="primary" class="transition">
+  <ion-button style="width: 75%;padding-left: 22%;margin-top: 15%;" (click)="visitiorActivity('checkout')" color="primary" class="transition">
     <strong class="white">
       Check Out
     </strong>  

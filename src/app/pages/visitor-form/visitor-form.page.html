@@ -4,25 +4,20 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
-
-  <form padding-right>
-    <ion-item>
-      <ion-label position="floating">Q1. </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-    <ion-item>
-      <ion-label position="floating">Q2. </ion-label>
-      <ion-input type="text"></ion-input>
-    </ion-item>
-
-    <ion-button 
-      color="primary" 
-      expand="block" 
-      [disabled]="!isValid" 
-      (click)="basicFormFill()">
-      Next
-    </ion-button>
+<ion-content padding>
+  
+  <!-- Checkin -->
+  <form *ngIf='action === "checkin" 'padding-right padding-left>
+    <h3>Checkin</h3>
   </form>
 
+  <!-- Visitor -->
+  <form *ngIf="action === 'check' ">
+    Visitor
+  </form>
+
+  <!-- Checkout -->
+  <form *ngIf="action === 'checkout' ">
+    
+  </form>
 </ion-content>

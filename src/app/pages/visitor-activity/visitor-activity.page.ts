@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Config } from '../../models/config/config';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { ToastController } from '@ionic/angular';
 import { VisitorService } from '../../servies/visitor/visitor.service';
 
@@ -27,28 +27,33 @@ export class VisitorActivityPage implements OnInit {
     console.log('clikced');
     switch (activity) {
       case 'checkin':
-        this.visitorCheckIn();
+        this.visitorCheckIn('checkin');
         break;
-      case 'checkin':
-        this.visitorCheckIn();
+      case 'check':
+        this.visitorCheckIn('check');
         break;
-      case 'checkin':
-        this.visitorCheckIn();
+      case 'checkout':
+        this.visitorCheckIn('checkout');
         break;
       default:
         break;
     }
   }
 
-  visitorCheckIn() {
+  visitorCheckIn(action: string) {
+    let navigationExtras: NavigationExtras = {
+      state: {
+        action
+      }
+    };
+    this.router.navigateByUrl('/visitor-form', navigationExtras);
+  }
+
+  visitorCheck(action: string) {
     this.router.navigateByUrl('/visitor-form');
   }
 
-  visitorCheck() {
-    this.router.navigateByUrl('/visitor-form');
-  }
-
-  visitorCheckOut() {
+  visitorCheckOut(action: string) {
     this.router.navigateByUrl('/visitor-form');
   }
 
