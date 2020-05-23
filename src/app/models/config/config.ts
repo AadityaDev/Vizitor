@@ -1,12 +1,13 @@
+import { FormField } from '../formField/form-field';
 export interface ConfigProps {
     camera: boolean;
-    formFields: Array<any>;
+    formFields: Array<FormField>;
     ndaDoc: string;
     logoUrl: string;
 }
 export class Config {
     private camera: boolean;
-    private formFields: Array<any>;
+    private formFields: Array<FormField>;
     private ndaDoc: string;
     private logoUrl: string;
 
@@ -14,36 +15,36 @@ export class Config {
 
     }
 
-    getCamera(): boolean {
+    public getCamera(): boolean {
         return this.camera;
     }
 
-    setCamera(camera: boolean): void {
+    public setCamera(camera: any): void {
         this.camera = camera;
     }
 
-    getFormFields(): Array<any> {
+    public getFormFields(): Array<FormField> {
         return this.formFields;
     }
 
-    setFormFields(formFields: Array<any>): void {
+    public setFormFields(formFields: Array<FormField>): void {
         this.formFields = formFields;
     }
 
-    getNdaDoc(): string {
+    public getNdaDoc(): string {
         return this.ndaDoc;
     }
 
-    setNdaDoc(ndaDoc: string): void {
+    public setNdaDoc(ndaDoc: string): void {
         this.ndaDoc = ndaDoc;
     }
 
-    getLogoUrl(): string {
+    public getLogoUrl(): string {
         return this.logoUrl;
     }
 
-    setLogoUrl(logoUrl: string): void {
-        this.logoUrl = logoUrl; 
+    public setLogoUrl(logoUrl: string): void {
+        this.logoUrl = logoUrl;
     }
 
 }

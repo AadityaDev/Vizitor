@@ -31,6 +31,10 @@ const routes: Routes = [
     path: 'visitor-activity',
     loadChildren: () => import('./pages/visitor-activity/visitor-activity.module').then( m => m.VisitorActivityPageModule)
   },
+  {
+    path: 'visitor-nda',
+    loadChildren: () => import('./pages/visitor-nda/visitor-nda.module').then( m => m.VisitorNdaPageModule)
+  },
 ];
 
 @NgModule({

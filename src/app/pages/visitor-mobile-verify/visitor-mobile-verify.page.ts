@@ -16,12 +16,10 @@ import { Config } from '../../models/config/config';
 export class VisitorMobileVerifyPage implements OnInit {
 
   isVerified = true;
-  OTP: string = '';
   showOTPInput: boolean = false;
   OTPmessage: string = 'An OTP is sent to your number. You should receive it in 30 s';
   mobile: string;
-  countryCode: string = '91';
-  countries: [];
+  countries: Array<any>;
   toast;
   otpVerification = {
     phoneNo: '',
@@ -35,23 +33,26 @@ export class VisitorMobileVerifyPage implements OnInit {
   constructor(private authService: AuthService, private toastCtrl: ToastController, private router: Router) {
     this.countries = data;
     this.config = new Config();
+    this.otpVerification.countryCode = '91';
+    this.otpVerification.country = this.countries.filter(item=> item.phone === this.otpVerification.countryCode).length > 0 
+    ? this.countries.filter(item => item.phone === this.otpVerification.countryCode)[0].name : '';
   }
 
   ngOnInit() {
   }
 
   async goToActivityPage() {
-    if (this.mobile && this.mobile.length === 10) {
+    if (this.mobile && this.otpVerification.countryCode && this.mobile.length === 10) {
       this.showOTPInput = true;
-      const fa = '%2B' + this.countryCode + this.mobile;
+      const fa = '%2B' + this.otpVerification.countryCode + this.mobile;
       const result: any = await this.authService.getOTP(fa).toPromise();
       if (result && result.success && result.data && result.data.otpSent) {
         console.log('success is: ' + result['success'] + ' OTP: '+  result['data']['otpSent']);
       } else {
-        await this.presentToast('some error occured!!!', 'middle', 3000);
+        await this.presentToast('some error occured!!!', 'middle', 1500);
       }
     } else {
-      await this.presentToast('mobile number is invalid!!!', 'middle', 3000);
+      await this.presentToast('mobile number is invalid!!!', 'middle', 1500);
     }
   }
 
@@ -90,17 +91,19 @@ export class VisitorMobileVerifyPage implements OnInit {
   }
 
   async verifyOTP() {
-    if (this.OTP !== '' && this.OTP !== null) {
-      this.otpVerification.countryCode = '91';
-      this.otpVerification.phoneNo = '+' + this.countryCode + this.mobile;
-      this.otpVerification.otp = this.OTP + '';
-      this.otpVerification.country = 'India';
+    if (this.otpVerification.otp && this.otpVerification.countryCode && this.otpVerification.country) {
+      console.log('res is: ' + JSON.stringify(this.otpVerification));
+      this.otpVerification.phoneNo = '+' + this.otpVerification.countryCode + this.mobile;
       this.otpVerification.timeZone = 'Asia/Kolkata';
       const result: any = await this.authService.otpVerify(this.otpVerification).toPromise();
       if (result && result.success && result.data && result.data.token) {
-        // console.log(`result is: ${result}`);
         localStorage.setItem('token', result.data.token);
-        this.router.navigateByUrl('/visitor-activity');
+        localStorage.setItem('refreshToken', result.data.refreshToken);
+        localStorage.setItem('userExists', result.data.userExists);
+        localStorage.setItem('role', result.data.role);
+        localStorage.setItem('userData', result.data.userData);
+        localStorage.setItem('companyToken', '1590217225769');
+        this.router.navigateByUrl('/visitor-nda');
       }
     } else {
       this.presentToast('Your OTP is not valid', 'bottom', 1500);
@@ -113,5 +116,11 @@ export class VisitorMobileVerifyPage implements OnInit {
 
   getNumber(enteredNumberObject: any){
     console.log(enteredNumberObject.mobile);
+  }
+
+  onSelectChange(selectedValue: any) {
+    // console.log('on slect change ' + selectedValue.detail.value);
+    this.otpVerification.country = this.countries.filter(item=> item.phone === selectedValue.detail.value).length > 0 
+    ? this.countries.filter(item => item.phone === selectedValue.detail.value)[0].name : '';
   }
 }

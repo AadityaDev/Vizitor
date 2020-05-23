@@ -1,0 +1,62 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>visitor-nda</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content background="#FFFFFF">
+  <ion-list *ngIf="config && !config.getFormFields()">
+    <!-- <ion-list-header>
+      <ion-label>
+        <ion-skeleton-text animated style="width: 20%"></ion-skeleton-text>
+      </ion-label>
+    </ion-list-header> -->
+    <ion-item *ngFor="let formDetail of loadingFormRows">
+      <!-- <ion-avatar slot="start">
+        <ion-skeleton-text animated></ion-skeleton-text>
+      </ion-avatar> -->
+      <ion-label position="floating">
+        <h3>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </h3>
+        <!-- <p>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </p> -->
+        <!-- <p>
+          <ion-skeleton-text animated style="width: 100%"></ion-skeleton-text>
+        </p> -->
+      </ion-label>
+      <ion-input>
+        <p>
+          <ion-skeleton-text animated style="width: 90%"></ion-skeleton-text>
+        </p>
+      </ion-input>
+    </ion-item>
+  </ion-list>
+  <ion-list *ngIf="config && config.getFormFields()">
+    <span *ngFor="let formDetail of config.getFormFields()">
+      <!-- <ion-item-divider>
+      </ion-item-divider> -->
+      <ion-item *ngIf="formDetail.display">
+        <ion-label position="floating">
+          <h3>{{ formDetail.displayName }}</h3>
+        </ion-label>
+        <ion-input type="text" placeholder="Enter {{ formDetail.displayName }}" [(ngModel)]="fieldValue" value="{{ formDetail.displayName }}"
+          required="formDetail.isRequiredField">
+        </ion-input>
+      </ion-item>
+    </span>
+    <ion-item *ngIf="config.ndaDoc">
+      <ion-label position="stacked">
+        <h3>
+          <b>NDA</b>
+        </h3>
+      </ion-label>
+      <ion-textarea disabled readonly auto-grow="true" value="{{ config.ndaDoc }}">
+    </ion-textarea>
+    </ion-item>
+    <ion-button expand="block" color="primary" class="transition" (click)="ndaSigned()"> 
+      Acknowledged
+    </ion-button>
+  </ion-list>
+</ion-content>

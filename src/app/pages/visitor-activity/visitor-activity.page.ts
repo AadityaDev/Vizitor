@@ -1,7 +1,7 @@
-import { AuthService } from '../../servies/auth/auth.service';
 import { Component, OnInit } from '@angular/core';
 import { Config } from '../../models/config/config';
 import { Router } from '@angular/router';
+import { ToastController } from '@ionic/angular';
 import { VisitorService } from '../../servies/visitor/visitor.service';
 
 @Component({
@@ -12,18 +12,15 @@ import { VisitorService } from '../../servies/visitor/visitor.service';
 export class VisitorActivityPage implements OnInit {
 
   config: Config;
+  toast;
 
-  constructor(private authService: AuthService, private router: Router, private visitorService: VisitorService) {
+  constructor(private router: Router, private toastCtrl: ToastController, private visitorService: VisitorService) {
     this.config = new Config();
     console.log('constructor: ');
   }
 
   async ngOnInit() {
-    const result: any = await this.authService.getNDA().toPromise();
-    console.log('result is: ' + result);
-    if (result && result.success && result.data) {
 
-    }
   }
 
   visitiorActivity(activity: string) {
@@ -53,6 +50,15 @@ export class VisitorActivityPage implements OnInit {
 
   visitorCheckOut() {
     this.router.navigateByUrl('/visitor-form');
+  }
+
+  async presentToast(message, position, duration) {
+    this.toast = await this.toastCtrl.create({
+      message,
+      duration,
+      position,
+    });
+    this.toast.present();
   }
 
 }

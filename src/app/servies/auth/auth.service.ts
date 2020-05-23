@@ -5,6 +5,7 @@ import { Observable, of } from 'rxjs';
 import { catchError, tap } from 'rxjs/operators';
 import { ToastController } from '@ionic/angular';
 import { CustomHttpParamEncoder } from '../custom-encoder';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
@@ -14,7 +15,7 @@ export class AuthService {
   apiUrl = 'http://13.234.203.187:8001/v1/';
   toast;
 
-  constructor(private formBuilder: FormBuilder, private http: HttpClient, private toastCtrl: ToastController) {
+  constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private toastCtrl: ToastController) {
 
   }
 
@@ -61,12 +62,30 @@ export class AuthService {
       );
   }
 
-  getNDA(): Observable<any>  {
-    return this.http.get<any>(this.apiUrl + 'configNda')
+  getNDA(companyToken: any): Observable<any>  {
+    const params = new HttpParams()
+    .set('token', companyToken);
+    return this.http.get<any>(this.apiUrl + 'configNda', { params })
       .pipe(
         tap(_ => this.log('getNDA')),
         catchError(this.handleError('getNDA', []))
       );
+  }
+
+  refreshToken(refreshToken): Observable<any> {
+    // const refreshToken = localStorage.getItem('refreshToken');
+      const params = new HttpParams({
+        encoder: new CustomHttpParamEncoder(),
+        fromObject: {
+          refreshToken,
+        }
+      });
+      const res = this.http.post<any>(this.apiUrl + 'token', params)
+      .pipe(
+        tap(_ => this.log('refreshToken')),
+        catchError(this.handleError('refreshToken', []))
+      );
+    return res;
   }
 
   private handleError<T>(operation = 'operation', result?: T) {
@@ -74,7 +93,20 @@ export class AuthService {
 
       // TODO: send the error to remote logging infrastructure
       console.error(error); // log to console instead
-      await this.presentToast('some error occured!!!', 'middle', 3000);
+      if (error && error.status === 401) {
+        // await this.presentToast('some error occured!!!', 'middle', 3000);
+        const refreshToken = localStorage.getItem('refreshToken');
+        const res: any = await this.refreshToken(refreshToken).toPromise();
+        console.log(`result is: ${res}`);
+        if (res && res.data && res.data.token) {
+          localStorage.setItem('refreshToken', res.data.token);
+        } else {
+          localStorage.clear();
+          this.router.navigateByUrl('/visitor-mobile-verify');
+        }
+      } else {
+        await this.presentToast('some error occured!!!', 'middle', 3000);
+      }
 
       // TODO: better job of transforming error for user consumption
       this.log(`${operation} failed: ${error.message}`);

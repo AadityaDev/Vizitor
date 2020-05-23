@@ -16,27 +16,36 @@
             </ion-text>
           </div>
         </ion-row>
-        <ion-row>
-            <!-- <ion-select>
-              <ion-option *ngFor="let country of countries">
-              {{country.emoji}}  <p color="#FFFFFF">{{ country.name }}</p>
-              </ion-option>
-            </ion-select> -->
-            <!-- <app-flag-list>
-              
-            </app-flag-list> -->
+        <ion-row margin>
+          
         </ion-row>
         <ion-row>
-          <ion-col>
+          <ion-select class="full-width-select" (ionChange)="onSelectChange($event)" placeholder="Country" [(ngModel)]="otpVerification.countryCode" expand="full">
+            <span *ngFor="let country of countries">
+              <ion-select-option value="{{ country.phone }}">
+                {{country.name}} {{country.emoji}} + {{country.phone}}
+              </ion-select-option>
+            </span>
+          </ion-select>
+        </ion-row>
+        <ion-row>
+            <!-- <ion-select (ionChange)="onSelectChange($event)" placeholder="Country" [(ngModel)]="otpVerification.countryCode">
+              <span *ngFor="let country of countries">
+                <ion-select-option value="{{ country.phone }}">
+                  {{country.emoji}} + {{country.phone}} + {{country.name}}
+                </ion-select-option>
+              </span>
+            </ion-select> -->
+            <ion-text value="{{ otpVerification.countryCode }}">
+            </ion-text>
             <ion-input clearInput type="tel" placeholder="Mobile Number" required="true" [(ngModel)]="mobile" value="{{ mobile }}" class="input" padding-horizontal
               clear-input="true">
             </ion-input>
-          </ion-col>
         </ion-row>
         <ion-row *ngIf="showOTPInput" class="OTP-border">
           <ion-col>
-            <ion-input clearInput type="number" placeholder="Ente OTP" required="true" [(ngModel)]="OTP" value="{{ OTP }}" class="input" padding-horizontal
-              clear-input="true">
+            <ion-input clearInput type="number" placeholder="Ente OTP" required="true" [(ngModel)]="otpVerification.otp" value="{{ otpVerification.otp }}" class="input"
+             padding-horizontal clear-input="true">
             </ion-input>
           </ion-col>
         </ion-row>
@@ -49,7 +58,7 @@
           <ion-col>
             <ion-button *ngIf="!showOTPInput" expand="block" (click)="next()"  color="primary" class="transition">
               <strong class="white">
-                Send OTP
+                Begin Registration
               </strong>
               </ion-button>
             <ion-button *ngIf="showOTPInput" expand="block" (click)="verifyOTP()"  color="primary" class="transition">
