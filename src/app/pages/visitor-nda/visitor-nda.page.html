@@ -46,13 +46,13 @@
         </ion-input>
       </ion-item>
     </span>
-    <ion-item *ngIf="config.ndaDoc">
+    <ion-item *ngIf="config.getNdaDoc()">
       <ion-label position="stacked">
         <h3>
           <b>NDA</b>
         </h3>
       </ion-label>
-      <ion-textarea disabled readonly auto-grow="true" value="{{ config.ndaDoc }}">
+      <ion-textarea disabled readonly auto-grow="true" value="{{ config.getNdaDoc() }}">
       </ion-textarea>
     </ion-item>
     <ion-button expand="block" class="colors" shape="round" (click)="ndaSigned()"> 

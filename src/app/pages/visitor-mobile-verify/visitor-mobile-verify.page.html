@@ -25,7 +25,8 @@
           </ion-select>
         </ion-row>
         <ion-row>
-            <ion-text value="{{ otpVerification.countryCode }}">
+            <ion-text>
+              {{ otpVerification.countryCode }}
             </ion-text>
             <ion-input clearInput type="tel" placeholder="Mobile Number" required="true" [(ngModel)]="mobile" value="{{ mobile }}" class="input" padding-horizontal
               clear-input="true">
