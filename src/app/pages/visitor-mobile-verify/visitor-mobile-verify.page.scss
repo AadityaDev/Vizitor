@@ -2,3 +2,39 @@
     width: 100%;
     text-align: center;
 }
+
+.card-background {
+    background: #ECEFF1;
+    color: #37474F;
+    font-size: 2rem;
+    margin-top: 20%;
+    margin-left: 16%;
+    margin-right: 16%;
+}
+
+.card-background-head {
+    // background: #e65100;
+    margin-top: 20%;
+    margin-left: 20%;
+    margin-right: 20%;
+}
+
+ion-content {
+    --ion-background-color: #78909C;
+}
+
+.header-footer-background {
+    --ion-background-color: #37474F;
+    color: #ffffff;
+}
+
+.colors {
+    // --background: #37474F;
+    // --color: #607D8B;
+    --background: #607D8B;
+    --color: #FFFFFF;
+}
+
+.colors-text {
+    --color: #37474F;
+}

@@ -1,24 +1,20 @@
 <ion-header>
-  <!-- <ion-toolbar>
-    <ion-title>visitor-mobile-verify</ion-title>
-  </ion-toolbar> -->
+  <ion-toolbar class="header-footer-background">
+    <ion-title>Mobile Registration</ion-title>
+  </ion-toolbar>
 </ion-header>
 
-<ion-content no-padding>
-  <div class="main">
-    <ion-card no-margin>
+<ion-content padding>
+  <ion-card class="card-background">
+    <ion-card-header>
+      <ion-text padding class="colors-text">
+        <h2 no-margin margin-vertical text-center>
+          <b class="colors-text">Register</b>
+        </h2>
+        <br>
+      </ion-text>
+    </ion-card-header>
       <ion-card-content>
-        <ion-row class="row">
-          <div class="fire-logo">
-            <img src="assets/icon/favicon.png" class="img-logo">
-            <ion-text padding>
-              <h2 no-margin margin-vertical text-center>Enter mobile number to receive OTP</h2>
-            </ion-text>
-          </div>
-        </ion-row>
-        <ion-row margin>
-          
-        </ion-row>
         <ion-row>
           <ion-select class="full-width-select" (ionChange)="onSelectChange($event)" placeholder="Country" [(ngModel)]="otpVerification.countryCode" expand="full">
             <span *ngFor="let country of countries">
@@ -29,13 +25,6 @@
           </ion-select>
         </ion-row>
         <ion-row>
-            <!-- <ion-select (ionChange)="onSelectChange($event)" placeholder="Country" [(ngModel)]="otpVerification.countryCode">
-              <span *ngFor="let country of countries">
-                <ion-select-option value="{{ country.phone }}">
-                  {{country.emoji}} + {{country.phone}} + {{country.name}}
-                </ion-select-option>
-              </span>
-            </ion-select> -->
             <ion-text value="{{ otpVerification.countryCode }}">
             </ion-text>
             <ion-input clearInput type="tel" placeholder="Mobile Number" required="true" [(ngModel)]="mobile" value="{{ mobile }}" class="input" padding-horizontal
@@ -56,12 +45,12 @@
         </ion-row>
         <ion-row>
           <ion-col>
-            <ion-button *ngIf="!showOTPInput" expand="block" (click)="next()"  color="primary" class="transition">
+            <ion-button *ngIf="!showOTPInput" expand="block" (click)="next()" class="colors" shape="round">
               <strong class="white">
                 Begin Registration
               </strong>
               </ion-button>
-            <ion-button *ngIf="showOTPInput" expand="block" (click)="verifyOTP()"  color="primary" class="transition">
+            <ion-button *ngIf="showOTPInput" expand="block" (click)="verifyOTP()"  class="colors" shape="round">
               <strong class="white">
                 Verify OTP
               </strong>
@@ -71,5 +60,12 @@
 
       </ion-card-content>
     </ion-card>
-  </div>
 </ion-content>
+
+<!-- <ion-footer>
+  <ion-toolbar class="header-footer-background">
+    <ion-title text-center>
+      Cp[yright]
+    </ion-title>
+  </ion-toolbar>
+</ion-footer> -->

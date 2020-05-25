@@ -14,6 +14,7 @@ export class VisitorNdaPage implements OnInit {
   public config: Config = new Config();
   loadingFormRows = [1,2,3,4,5,6,7,8,9,10];
   toast;
+  public models: Array<any> = new Array<any>();
 
   constructor(private authService: AuthService, private router: Router, private toastCtrl: ToastController ) { 
     this.getNDA();
@@ -30,6 +31,7 @@ export class VisitorNdaPage implements OnInit {
       const { camera, formFields, ndaDoc } = result.data;
       this.config.setCamera(camera);
       this.config.setFormFields(formFields);
+      this.models = new Array<any>(formFields.length);
       this.config.setNdaDoc(ndaDoc);
     } else {
       await this.presentToast('some error occured!!!', 'middle', 1500);
@@ -46,6 +48,19 @@ export class VisitorNdaPage implements OnInit {
       if (requiredField && requiredField.displayName) {
         await this.presentToast(`${requiredField.displayName} is missing!!!`, 'middle', 1500);
       } else {
+        if (this.config.getFormFields().length > 0) {
+          // this.config.getFormFields().forEach(element => {
+          //   if (element && element.getFieldValue() === null) {
+          //     element.setFieldValue(mode);
+          //   }
+          // });
+          for (let index = 0; index < this.config.getFormFields().length; index++) {
+            const element = this.config.getFormFields()[index];
+            if (element && element.getFieldValue() === null && this.models[index]) {
+              element.setFieldValue(this.models[index]);
+            }
+          }
+        }
         this.router.navigateByUrl('/visitor-activity');
       }
     } else {

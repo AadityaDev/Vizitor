@@ -1,6 +1,6 @@
 <ion-header>
-  <ion-toolbar>
-    <ion-title>visitor-nda</ion-title>
+  <ion-toolbar class="header-footer-background">
+    <ion-title>NDA for Visitor</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -34,14 +34,14 @@
     </ion-item>
   </ion-list>
   <ion-list *ngIf="config && config.getFormFields()">
-    <span *ngFor="let formDetail of config.getFormFields()">
+    <span *ngFor="let formDetail of config.getFormFields();let i = index">
       <!-- <ion-item-divider>
       </ion-item-divider> -->
       <ion-item *ngIf="formDetail.display">
         <ion-label position="floating">
           <h3>{{ formDetail.displayName }}</h3>
         </ion-label>
-        <ion-input type="text" placeholder="Enter {{ formDetail.displayName }}" [(ngModel)]="fieldValue" value="{{ formDetail.displayName }}"
+        <ion-input type="text" placeholder="Enter {{ formDetail.displayName }}" [(ngModel)]="models[i]" value="{{ formDetail.displayName }}"
           required="formDetail.isRequiredField">
         </ion-input>
       </ion-item>
@@ -53,9 +53,9 @@
         </h3>
       </ion-label>
       <ion-textarea disabled readonly auto-grow="true" value="{{ config.ndaDoc }}">
-    </ion-textarea>
+      </ion-textarea>
     </ion-item>
-    <ion-button expand="block" color="primary" class="transition" (click)="ndaSigned()"> 
+    <ion-button expand="block" class="colors" shape="round" (click)="ndaSigned()"> 
       Acknowledged
     </ion-button>
   </ion-list>
