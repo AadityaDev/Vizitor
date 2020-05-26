@@ -12,7 +12,8 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
 
-  apiUrl = 'http://13.234.203.187:8001/v1/';
+  // apiUrl = 'http://13.234.203.187:8001/v1/';
+  apiUrl = 'https://pass.vizitorapp.com/v1/';
   toast;
 
   constructor(private formBuilder: FormBuilder, private http: HttpClient, private router: Router, private toastCtrl: ToastController) {

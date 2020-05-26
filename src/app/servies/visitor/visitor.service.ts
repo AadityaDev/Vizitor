@@ -11,7 +11,8 @@ import { ToastController } from '@ionic/angular';
 })
 export class VisitorService {
 
-  apiUrl = 'http://localhost:3000/api/';
+  // apiUrl = 'http://localhost:3000/api/';
+  apiUrl = 'https://pass.vizitorapp.com/v1/';
   toast;
 
   constructor(private http: HttpClient, private router: Router, private toastCtrl: ToastController) {
